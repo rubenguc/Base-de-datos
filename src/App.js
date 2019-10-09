@@ -51,7 +51,7 @@ export default class extends Component {
           prop: "nroGarantia"},
 
           {name: "Detalle",
-            prop: "detalle"}
+            prop: "detalleFalla"}
 
           
           ]}/>
