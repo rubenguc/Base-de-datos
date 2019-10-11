@@ -5,6 +5,9 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
 
 const currencies = [
   {
@@ -59,7 +62,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: 15,
     width: 700,
     marginTop: theme.spacing(-3),
-    marginBottom: theme.spacing(-3)
+    marginBottom: theme.spacing(-3),
+    display: "block",
+    transformOrigin: "top left"
   },
   button: {
     margin: theme.spacing(1)
@@ -72,12 +77,15 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
-    alignItems: "left"
-  }
+    alignItems: "center",
+    backgroundColor: "green"
+  },
+  card: {
+    minWidth: 275,
+  },
 }));
 
 export default function FormTicket(props) {
-  
   const [values, setValues] = useState({
     nombre: "",
     email: "",
@@ -90,13 +98,13 @@ export default function FormTicket(props) {
   });
 
   const limpiar = () => {
-    values.nombre="";
-    values.email="";
-    values.tema="";
-    values.telefono="";
-    values.nroFactura="";
-    values.nroGarantia="";
-    values.detalleFalla="";
+    values.nombre = "";
+    values.email = "";
+    values.tema = "";
+    values.telefono = "";
+    values.nroFactura = "";
+    values.nroGarantia = "";
+    values.detalleFalla = "";
   };
 
   const handleChange = name => event => {
@@ -107,26 +115,29 @@ export default function FormTicket(props) {
   const handleSubmit = e => {
     //se activa en el onSubmit
     e.preventDefault();
-    props.onSubmit({...values});
+    props.onSubmit({ ...values });
     limpiar();
   };
 
-  const handleReset =  (e) => {
-    //no borra
-    //values.nombre="";
-    limpiar();
-  }
-
+  const handleReset = () => {
+    setValues('');
+  };
 
   const classes = useStyles();
 
   return (
-    <div className={classes.paper}>
+    
+    
+      <Card className={classes.card}>
+      <CardContent>
       <Typography variant="h6">
         Rellene el formulario para abrir un ticket nuevo
-        {values.nombre}
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmit}>
+      <form
+        className={classes.form}
+        onSubmit={handleSubmit}
+        onReset={handleReset}
+      >
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -222,9 +233,9 @@ export default function FormTicket(props) {
                   root: classes.labelRoot
                 }
               }}
-              multiline
+              multiline={true}
               className={classes.falla}
-              margin="none"
+              margin="normal"
               value={values.detalleFalla}
               onChange={handleChange("detalleFalla")}
             />
@@ -242,21 +253,25 @@ export default function FormTicket(props) {
             </Button>
           </Grid>
 
-
           {/* no le da la gana de borrar >:v */}
           <Grid item xs={12} sm={4}>
             <Button
+              type="reset"
+              name="Reset"
               variant="contained"
               color="secondary"
               className={classes.button}
               value={values}
-              //onClick={handleReset}
+              onClick={handleReset}
             >
               Restablecer
             </Button>
           </Grid>
         </Grid>
       </form>
-    </div>
+      </CardContent>
+  
+    </Card>
+    
   );
 }
