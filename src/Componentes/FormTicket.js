@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -117,7 +119,16 @@ export default function FormTicket(props) {
   const handleSubmit = e => {
     //se activa en el onSubmit
     e.preventDefault();
-    props.onSubmit({ ...values });
+    console.log(values);
+    axios.post("http://localhost:3001/api/ticket",
+    {nombrecontacto: values.nombre,
+     correocontacto: values.email, telefonocontacto: values.telefono,
+     temaayuda: values.tema, nrofactura: values.nroFactura,
+     nrogaranta: values.nroGarantia, detallefalla: values.detalleFalla })
+      .then(res => {
+        console.log('guardao exitosamente')
+      })
+    //props.onSubmit({ ...values });
     limpiar();
   };
 
