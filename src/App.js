@@ -36,12 +36,12 @@ function a11yProps(index) {
 
 export default class App extends Component {
   state = {
-    data: [],
+    //data: [],
     pos: 0
   };
 
   onSubmit = fields => {
-    this.setState({ data: fields });
+    //this.setState({ data: fields });
   };
 
   handleChange = (event, newValue) => {
@@ -66,12 +66,12 @@ export default class App extends Component {
             </Tabs>
           </Paper>
 
-          <TabPanel           value={this.state.pos} index={0}>
+          <TabPanel value={this.state.pos} index={0}>
             {/*Panel del formulario */}
             <FormTicket
               onSubmit={submission =>
                 this.setState({
-                  data: [...this.state.data, submission]
+                  //data: [...this.state.data, submission]
                 })
               }
             />
@@ -80,21 +80,17 @@ export default class App extends Component {
             {/* Panel de la tabla */}
             <p>{JSON.stringify(this.state.fields, null, 2)}</p>
             <TablaTicket
-              data={this.state.data}
+              
               header={[
-                { name: "Nombre", prop: "nombre" },
+                { name: "#Ticket", prop: "idticket" },
 
-                { name: "Email", prop: "email" },
+                { name: "Fechacreado", prop: "fechacreado" },
 
-                { name: "Telefono", prop: "telefono" },
+                { name: "Fechaactualizado", prop: "fechaactualizado" },
 
-                { name: "Tema de Ayuda", prop: "tema" },
+                { name: "Estatus", prop: "estatus" },
 
-                { name: "Nro.Factura", prop: "nroFactura" },
-
-                { name: "Nro.Garantia", prop: "nroGarantia" },
-
-                { name: "Detalle", prop: "detalleFalla" }
+                { name: "Departamento", prop: "departamento" }
               ]}
             />
           </TabPanel>

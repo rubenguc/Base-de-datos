@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
+import axios from "axios";
 import {
   Table,
   TableBody,
@@ -26,8 +27,19 @@ const row = (x, i, header) => (
   </TableRow>
 );
 
-export default function TablaTicket({ data, header }) {
+export default function TablaTicket({ header }) {
   const classes = useStyles();
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/ticket")
+      .then(({ data }) => {
+        setData(data);
+        console.log(data);
+      });
+  }, []);
+
 
   return (
     <Card className={classes.card}>
