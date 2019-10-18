@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 
 import TextField from "@material-ui/core/TextField";
@@ -95,29 +95,30 @@ export default function FormTicket(props) {
     email: "",
     tema: "",
     telefono: "",
-    nroFactura: "",
-    nroGarantia: "",
-    detalleFalla: ""
+    nroFactura: 0,
+    nroGarantia: 0,
+    detalleFalla: "",
     //falta imagenes
+    v: '1'
   });
 
-  const limpiar = () => {
-    values.nombre = "";
-    values.email = "";
-    values.tema = "";
-    values.telefono = "";
-    values.nroFactura = "";
-    values.nroGarantia = "";
-    values.detalleFalla = "";
+  const handleReset = () => {
+    setValues({
+      nombre: '',
+      email: "",
+      tema: "",
+      telefono: "",
+      nroFactura: 0,
+      nroGarantia: 0,
+      detalleFalla: "" 
+    })
   };
 
   const handleChange = name => event => {
-    //asigna el valor de los imputs a los states
     setValues({ ...values, [name]: event.target.value });
   };
 
   const handleSubmit = e => {
-    //se activa en el onSubmit
     e.preventDefault();
     console.log(values);
     axios.post("http://localhost:3001/api/ticket",
@@ -126,15 +127,13 @@ export default function FormTicket(props) {
      temaayuda: values.tema, nrofactura: values.nroFactura,
      nrogaranta: values.nroGarantia, detallefalla: values.detalleFalla })
       .then(res => {
-        console.log('guardao exitosamente')
+        console.log('guardado exitosamente')
+        
       })
-    //props.onSubmit({ ...values });
-    limpiar();
+      handleReset(); 
   };
 
-  const handleReset = () => {
-    setValues("");
-  };
+  
 
   const classes = useStyles();
 
@@ -147,7 +146,6 @@ export default function FormTicket(props) {
         <form
           className={classes.form}
           onSubmit={handleSubmit}
-          onReset={handleReset}
         >
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -263,7 +261,6 @@ export default function FormTicket(props) {
               </Button>
             </Grid>
 
-            {/* no le da la gana de borrar >:v */}
             <Grid item xs={12} sm={4}>
               <Button
                 type="reset"
