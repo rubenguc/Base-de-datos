@@ -82,15 +82,15 @@ export default class App extends Component {
             <TablaTicket
               
               header={[
-                { name: "#Ticket", prop: "idticket" },
+                { name: "#Ticket", prop: "idticket"},
 
-                { name: "Fechacreado", prop: "fechacreado" },
+                { name: "F.Creado", prop: "fechacreado"},
 
-                { name: "Fechaactualizado", prop: "fechaactualizado" },
+                { name: "F.Actualizado", prop: "fechaactualizado"},
 
-                { name: "Estatus", prop: "estatus" },
+                { name: "Estatus", prop: "estatus"},
 
-                { name: "Departamento", prop: "departamento" }
+                { name: "Departamento", prop: "departamento"}
               ]}
             />
           </TabPanel>

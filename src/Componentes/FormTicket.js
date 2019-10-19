@@ -89,6 +89,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function refreshPage() {
+  window.location.reload(false);
+}
+
 export default function FormTicket(props) {
   const [values, setValues] = useState({
     nombre: "",
@@ -102,6 +106,7 @@ export default function FormTicket(props) {
     v: '1'
   });
 
+
   const handleReset = () => {
     setValues({
       nombre: '',
@@ -113,11 +118,12 @@ export default function FormTicket(props) {
       detalleFalla: "" 
     })
   };
+  
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
-
+  
   const handleSubmit = e => {
     e.preventDefault();
     console.log(values);
@@ -132,8 +138,6 @@ export default function FormTicket(props) {
       })
       handleReset(); 
   };
-
-  
 
   const classes = useStyles();
 
@@ -256,6 +260,7 @@ export default function FormTicket(props) {
                 variant="contained"
                 color="primary"
                 className={classes.button}
+                onClick={refreshPage}
               >
                 Enviar Ticket
               </Button>
