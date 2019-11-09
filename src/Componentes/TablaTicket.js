@@ -6,8 +6,9 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn
+  TableRowColumn,
 } from "material-ui/Table";
+import TableCell from '@material-ui/core/TableCell';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 const row = (x, i, header) => (
   <TableRow key={`tr-${i}`}>
     {header.map((y, k) => (
-      <TableRowColumn key={`trc-${k}`}>{x[y.prop]}</TableRowColumn>
+      <TableRowColumn  align="center" padding='none' key={`trc-${k}`}>{x[y.prop]}</TableRowColumn>
     ))}
   </TableRow>
 );
@@ -51,7 +52,7 @@ export default function TablaTicket({ header }) {
                 <TableHeaderColumn key={`thc-${i}`}>{x.name}</TableHeaderColumn>
               ))}
             </TableRow>
-          </TableHeader>
+          </TableHeader>  
           <TableBody>{data.map((x, i) => row(x, i, header))}</TableBody>
         </Table>
       </CardContent>

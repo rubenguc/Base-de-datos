@@ -84,11 +84,13 @@ export default class App extends Component {
               header={[
                 { name: "#Ticket", prop: "idticket"},
 
-                { name: "F.Creado", prop: "fechacreado"},
+                { name: "Fecha Creado", prop: "fechacreado"},
 
-                { name: "F.Actualizado", prop: "fechaactualizado"},
+                { name: "Fecha Actualizado", prop: "fechaactualizado"},
 
-                { name: "Estatus", prop: "estatus"},
+                { name: "Estado", prop: "estatus"},
+
+                { name: "Asunto", prop: "asunto"},
 
                 { name: "Departamento", prop: "departamento"}
               ]}

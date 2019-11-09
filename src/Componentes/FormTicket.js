@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -73,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   },
   input: {
-    display: "none"
+    display: "block"
   },
   paper: {
     marginTop: theme.spacing(1),
@@ -86,7 +87,8 @@ const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 275,
     backgroundColor: "#fafafa"
-  }
+  },
+  
 }));
 
 function refreshPage() {
@@ -99,8 +101,8 @@ export default function FormTicket(props) {
     email: "",
     tema: "",
     telefono: "",
-    nroFactura: 0,
-    nroGarantia: 0,
+    nroFactura: "",
+    nroGarantia: "",
     detalleFalla: "",
     //falta imagenes
     v: '1'
@@ -113,8 +115,8 @@ export default function FormTicket(props) {
       email: "",
       tema: "",
       telefono: "",
-      nroFactura: 0,
-      nroGarantia: 0,
+      nroFactura: "",
+      nroGarantia: "",
       detalleFalla: "" 
     })
   };
@@ -132,10 +134,11 @@ export default function FormTicket(props) {
      correocontacto: values.email, telefonocontacto: values.telefono,
      temaayuda: values.tema, nrofactura: values.nroFactura,
      nrogaranta: values.nroGarantia, detallefalla: values.detalleFalla })
-      .then(res => {
-        console.log('guardado exitosamente')
-        
+      .then(res => {     
       })
+      .catch(e => {
+      console.log(e)
+    })
       handleReset(); 
   };
 
@@ -236,7 +239,9 @@ export default function FormTicket(props) {
 
             <Grid item xs={12}>
               <TextField
-                id="standard-textarea"
+                id="standard-multiline-static"
+                multiline
+                rows= "5"
                 name="detalleFalla"
                 label={`Detalle de la falla: Describa la falla e indique la cédula, rif y 
               nombre que aparece en la factura, modelo del producto y 
@@ -251,6 +256,21 @@ export default function FormTicket(props) {
                 value={values.detalleFalla}
                 onChange={handleChange("detalleFalla")}
               />
+            </Grid>
+
+            <Grid item xs={12}>
+            <input
+            accept="image/*"
+            className="d-none"
+            id="contained-button-file"
+            multiple
+            type="file"
+            />
+            <label htmlFor="contained-button-file">
+              <Button variant="contained" component="span" className={classes.button}>
+                Upload
+              </Button>
+            </label> 
             </Grid>
 
             <Grid item xs={12} sm={4}>
@@ -279,6 +299,9 @@ export default function FormTicket(props) {
                 Restablecer
               </Button>
             </Grid>
+
+            
+
           </Grid>
         </form>
       </CardContent>
